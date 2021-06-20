@@ -1,6 +1,6 @@
 org: udittlamba
 app: replicant-2-0-api
-service: replicant-2-0-api
+service: replicant-2-api
 
 frameworkVersion: '2'
 
@@ -35,13 +35,16 @@ functions:
       - http:
           path: /
           method: ANY
+          authorizer: aws_iam
       - http:
           path: /{proxy+}
           method: ANY
+          authorizer: aws_iam
 
 resources:
   Resources:
     UsersTable:
+      DeletionPolicy: Retain
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
@@ -54,3 +57,7 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
