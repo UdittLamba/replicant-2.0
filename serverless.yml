@@ -35,11 +35,9 @@ functions:
       - http:
           path: /
           method: ANY
-          authorizer: aws_iam
       - http:
           path: /{proxy+}
           method: ANY
-          authorizer: aws_iam
 
 resources:
   Resources:
