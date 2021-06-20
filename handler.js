@@ -13,8 +13,8 @@ app.get('/users/:userId', async function (req, res) {
   const params = {
     TableName: USERS_TABLE,
     Key: {
-      userId: req.params.userId,
-    },
+      userId: req.params.userId
+    }
   }
 
   try {
@@ -45,8 +45,8 @@ app.post('/users', async function (req, res) {
     TableName: USERS_TABLE,
     Item: {
       userId: userId,
-      name: name,
-    },
+      name: name
+    }
   }
 
   try {
@@ -60,7 +60,7 @@ app.post('/users', async function (req, res) {
 
 app.use((req, res, next) => {
   return res.status(404).json({
-    error: 'Not Found',
+    error: 'Not Found'
   })
 })
 
